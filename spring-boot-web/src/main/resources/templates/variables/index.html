@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title th:text="${titulo}"></title>
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+<ul>
+<!-- @ NO $! . Llamando al mapeo. $ para las variables como en ${titulo}. -->
+<li><a th:href="@{/variables/string/} + 'Hola Paco'">/variables/string/Hola Paco</a></li>
+<li><a th:href="@{/variables/string/} + 'Hola Pepe'">/variables/string/Hola Pepe</a></li>
+<li><a th:href="@{/variables/string/} + 'Hola' + '/' + 8">/variables/string/Hola/8</a></li>
+</ul>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.web.app.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,12 @@ import com.bolsadeideas.springboot.web.app.models.Usuario;
 @RequestMapping("/app")
 public class IndexController {
 	
+	@Value("${texto.indexcontroller.index.titulo}")
+	private String textoIndex;
+	@Value("${texto.indexcontroller.perfil.titulo}")
+	private String textoPerfil;
+	@Value("${texto.indexcontroller.listar.titulo}")
+	private String textoListar;
 	//Mappeador que carga una ruta/vista mediante url. Puede ser GetMapping, PostMapping...
 	@RequestMapping({"/index", "/","","/home"})
 	//Adding stuff to the model.
@@ -23,7 +30,7 @@ public class IndexController {
 	//Otra manera mas es ModelAndView mv || mv.addObject(); || mv.setViewName("index");||Se cambia a return mv;
 	public String index(Model model) {
 		//titulo del html se muestra a traves del atributo titulo.
-		model.addAttribute("titulo", "Hola Spring Framework con Model!");
+		model.addAttribute("titulo", textoIndex);
 		return "index";
 	}
 	
@@ -35,14 +42,14 @@ public class IndexController {
 		usuario.setEmail("pepe@gmail.com");
 		
 		model.addAttribute("usuario", usuario);
-		model.addAttribute("titulo", "Perfil del usuario: ".concat(usuario.getNombre()));
+		model.addAttribute("titulo", textoPerfil.concat(usuario.getNombre()));
 		
 		return "perfil";
 	}
 	
 	@RequestMapping("/listar")
 	public String listar(Model model) {
-	model.addAttribute("titulo", "Listado de usuarios");
+	model.addAttribute("titulo", textoListar);
 	return "/listar";
 	}
 	//Usamos el ModelAttribute cuando queremos pasar a la vista algo comun a todos los metodos del controlador/ o que queremos tener en todas las vistas: /index /listar etc....
